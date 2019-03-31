@@ -13,11 +13,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  fetchPhotos(tags, perPage): Observable<any> {
+  fetchPhotos(tags, perPage, page?): Observable<any> {
     const params = new HttpParams()
       .set('api_key', environment.apiKey)
       .set('per_page', perPage)
       .set('tags', tags)
+      .set('page', page || 1)
       .set('extras', 'date_upload, date_taken, owner_name, views, url_q');
 
     const httpOptions = { headers: this.headers, params };

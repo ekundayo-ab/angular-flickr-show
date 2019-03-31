@@ -1,3 +1,5 @@
+<p class="lead text-primary">Photos for <b>{{tagName}}</b> tag</p>
+
 <div class="row mt-5 search-results">
     <div *ngFor="let photo of photos" class="col-md-3 mb-3">
       <app-photo-card [photo]="photo" [showDetail]="false"></app-photo-card>
@@ -8,14 +10,21 @@
     <div class="col">
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
           <li class="page-item">
-            <a class="page-link" href="#">Next</a>
+            <button (click)="fetchFirstPage" class="page-link" type="button">First</button>
+          </li>
+          <li [ngClass]="{'disabled': currentPage <= 1}" class="page-item">
+            <button (click)="fetchOtherPage('-')" class="page-link" type="button">
+              <i class="fa fa-angle-left"></i>
+            </button>
+          </li>
+          <li [ngClass]="{'disabled': currentPage >= totalPages}" class="page-item">
+            <button [disabled]="currentPage >= totalPages" (click)="fetchOtherPage('+')" class="page-link" type="button">
+              <i class="fa fa-angle-right"></i>
+            </button>
+          </li>
+          <li class="page-item">
+            <button (click)="fetchLastPage" class="page-link" type="button">Last</button>
           </li>
         </ul>
       </nav>
