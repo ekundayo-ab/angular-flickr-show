@@ -30,7 +30,6 @@ export class TagsComponent implements OnInit {
     }
 
     const filteredTags = stripAndFilterTags(tags);
-    console.log(filteredTags);
 
     this.apiService.fetchTags(filteredTags).subscribe((res) => {
       console.log(res.photos.photo);
@@ -38,9 +37,12 @@ export class TagsComponent implements OnInit {
 
       this.sortBy(this.activeSort);
       this.noTagEnteredMessage = false;
-      this.tagForm.setValue({ tags: '' });
+      this.resetForm();
     });
+  }
 
+  resetForm() {
+    this.tagForm.setValue({ tags: '' });
   }
 
   parseDateTaken(date) {
