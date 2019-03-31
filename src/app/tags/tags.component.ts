@@ -35,6 +35,8 @@ export class TagsComponent implements OnInit {
     this.apiService.fetchTags(filteredTags).subscribe((res) => {
       console.log(res.photos.photo);
       this.photos = res.photos.photo;
+
+      this.sortBy(this.activeSort);
       this.noTagEnteredMessage = false;
       this.tagForm.setValue({ tags: '' });
     });
@@ -54,8 +56,8 @@ export class TagsComponent implements OnInit {
     this.activeSort = fieldName;
 
     this.photos.sort((prevRecord, nextRecord) => {
-      const prev = prevRecord[fieldName].toUpperCase(); // ignore upper and lowercase
-      const next = nextRecord[fieldName].toUpperCase(); // ignore upper and lowercase
+      const prev = fieldName === 'views' ? parseInt(prevRecord[fieldName], 10) : prevRecord[fieldName].toUpperCase();
+      const next = fieldName === 'views' ? parseInt(nextRecord[fieldName], 10) : nextRecord[fieldName].toUpperCase();
 
       if (prev < next) {
         return -1;
