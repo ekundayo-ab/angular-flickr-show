@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from './../providers/api.service';
 import { stripAndFilterTags } from '../definitions';
@@ -8,7 +8,7 @@ import { stripAndFilterTags } from '../definitions';
   templateUrl: './tags.component.html',
   styleUrls: ['./tags.component.scss']
 })
-export class TagsComponent implements OnInit {
+export class TagsComponent {
   photos: any[] = [];
   photoTags: string[] = [];
   noTagEnteredMessage = false;
@@ -21,8 +21,6 @@ export class TagsComponent implements OnInit {
 
   constructor(private apiService: ApiService) { }
 
-  ngOnInit() {}
-
   onSubmit() {
     const { tags } = this.tagForm.value;
 
@@ -33,7 +31,7 @@ export class TagsComponent implements OnInit {
 
     const filteredTags = stripAndFilterTags(tags);
 
-    this.apiService.fetchTags(filteredTags).subscribe((res) => {
+    this.apiService.fetchPhotos(filteredTags, 1).subscribe((res) => {
       if (this.photoTags.includes(filteredTags)) {
         this.tagAddedAlready = true;
         return;
@@ -48,8 +46,6 @@ export class TagsComponent implements OnInit {
         })
       ];
 
-      console.log(this.photos)
-
       this.sortBy(this.activeSort);
       this.noTagEnteredMessage = false;
       this.tagAddedAlready = false;
@@ -62,15 +58,6 @@ export class TagsComponent implements OnInit {
   }
 
   get tags() { return this.tagForm.get('tags'); }
-
-  parseDateTaken(date) {
-    return date.split(' ')[0].split('-').reverse().join('.');
-  }
-
-  parseDateUploaded(date) {
-    return new Date(parseInt(date, 10) * 1000).toISOString()
-      .split('T')[0].split('-').reverse().join('.');
-  }
 
   sortBy(fieldName) {
     this.activeSort = fieldName;

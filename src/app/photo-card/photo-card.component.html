@@ -1,0 +1,23 @@
+<div class="card">
+  <div *ngIf="showDetail">
+    <span class="views">{{ photo.views }}</span>
+    <span class="search-tag">{{ photo.title | titlecase }}</span>
+  </div>
+  <div class="card-block">
+    <img [src]="photo.url_q" class="card-img-top" alt="...">
+    <div *ngIf="showDetail" class="card-body text-center">
+      <h5 class="card-title">{{ photo.ownername }}</h5>
+      <div class="row">
+        <div class="col">
+          <p class="mb-0">Uploaded</p>
+          <p class="font-weight-bold">{{ parseDateUploaded(photo.dateupload) }}</p>
+        </div>
+        <div class="col">
+          <p class="mb-0">Taken</p>
+          <p class="font-weight-bold">{{ parseDateTaken(photo.datetaken)}}</p>
+        </div>
+      </div>
+      <a [routerLink]="['/tags', photo.tags]" class="text-secondary"><small>Show all images</small></a>
+    </div>
+  </div>
+</div>

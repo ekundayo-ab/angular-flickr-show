@@ -1,10 +1,5 @@
 @import '~src/styles/mixins';
 
-.card {
-  box-shadow: 0 1px 5px rgba(61, 61, 61, 0.12), 0 1px 5px rgba(65, 64, 64, 0.24);
-  border: none;
-}
-
 .sorter {
   li {
     &:hover { cursor: pointer; }
@@ -19,8 +14,4 @@
     color: inherit;
     font-weight: bolder;
   }
-}
-
-.search-results {
-  @include tag-card();
 }

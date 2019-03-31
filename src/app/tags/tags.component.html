@@ -38,26 +38,6 @@
 <div class="row mt-3 search-results">
   <div *ngIf="!photos.length" class="lead col-md-3">No tag photos yet</div>
   <div *ngFor="let photo of photos" class="col-md-3 mb-3">
-    <div class="card">
-      <span class="views">{{ photo.views }}</span>
-      <span class="search-tag">{{ photo.title | titlecase }}</span>
-      <div class="card-block">
-        <img [src]="photo.url_q" class="card-img-top" alt="...">
-        <div class="card-body text-center">
-          <h5 class="card-title">{{ photo.ownername }}</h5>
-          <div class="row">
-            <div class="col">
-              <p class="mb-0">Uploaded</p>
-              <p class="font-weight-bold">{{ parseDateUploaded(photo.dateupload) }}</p>
-            </div>
-            <div class="col">
-              <p class="mb-0">Taken</p>
-              <p class="font-weight-bold">{{ parseDateTaken(photo.datetaken)}}</p>
-            </div>
-          </div>
-          <a [routerLink]="['/tags', '8']" class="text-secondary"><small>Show all images</small></a>
-        </div>
-      </div>
-    </div>
+    <app-photo-card [photo]="photo"></app-photo-card>
   </div>
 </div>

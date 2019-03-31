@@ -1,26 +1,6 @@
 <div class="row mt-5 search-results">
-    <div class="col-md-3">
-      <div class="card">
-        <span class="views">1.565</span>
-        <span class="search-tag">SEARCH TAG</span>
-        <div class="card-block">
-          <img src="https://picsum.photos/200/150" class="card-img-top" alt="...">
-          <div class="card-body text-center">
-            <h5 class="card-title">owners name</h5>
-            <div class="row">
-              <div class="col">
-                <p class="mb-0">Uploaded</p>
-                <p class="font-weight-bold">21.08.2018</p>
-              </div>
-              <div class="col">
-                <p class="mb-0">Taken</p>
-                <p class="font-weight-bold">21.08.2018</p>
-              </div>
-            </div>
-            <a [routerLink]="['/tags', '8']" class="text-secondary"><small>Show all images</small></a>
-          </div>
-        </div>
-      </div>
+    <div *ngFor="let photo of photos" class="col-md-3 mb-3">
+      <app-photo-card [photo]="photo" [showDetail]="false"></app-photo-card>
     </div>
   </div>
 

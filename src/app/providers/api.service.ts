@@ -13,10 +13,10 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  fetchTags(tags): Observable<any> {
+  fetchPhotos(tags, perPage): Observable<any> {
     const params = new HttpParams()
       .set('api_key', environment.apiKey)
-      .set('per_page', '1')
+      .set('per_page', perPage)
       .set('tags', tags)
       .set('extras', 'date_upload, date_taken, owner_name, views, url_q');
 
@@ -24,9 +24,4 @@ export class ApiService {
 
     return this.http.get(`${this.apiUrl}`, httpOptions);
   }
-
-  // For testing so as not to make much API calls to the flickr service
-  // fetchMockTags(tags) {
-  //   return of(tagPhotos);
-  // }
 }
