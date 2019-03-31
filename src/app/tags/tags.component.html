@@ -20,10 +20,16 @@
   <div class="col sorter">
     <h5>Requests</h5>
     <ul class="list-group list-group-horizontal">
-      <li class="list-group-item"><span>Sorted by</span></li>
-      <li class="list-group-item"><span>Number of views</span></li>
-      <li class="list-group-item"><span>Date when the photo was taken</span></li>
-      <li class="list-group-item"><span>Date when the photo was uploaded</span></li>
+      <li class="list-group-item"><span>Sorted by:</span></li>
+      <li class="list-group-item" [ngClass]="{'active': activeSort === 'views'}" (click)="sortBy('views')">
+        <span>Number of views</span>
+      </li>
+      <li class="list-group-item" [ngClass]="{'active': activeSort === 'datetaken'}" (click)="sortBy('datetaken')">
+        <span>Date when the photo was taken</span>
+      </li>
+      <li class="list-group-item" [ngClass]="{'active': activeSort === 'dateupload'}" (click)="sortBy('dateupload')">
+        <span>Date when the photo was uploaded</span>
+      </li>
     </ul>
   </div>
 </div>

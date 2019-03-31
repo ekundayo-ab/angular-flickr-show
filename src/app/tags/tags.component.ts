@@ -1,6 +1,6 @@
-import { ApiService } from './../providers/api.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ApiService } from './../providers/api.service';
 import { stripAndFilterTags } from '../definitions';
 
 @Component({
@@ -11,6 +11,7 @@ import { stripAndFilterTags } from '../definitions';
 export class TagsComponent implements OnInit {
   photos: any[] = [];
   noTagEnteredMessage = false;
+  activeSort = 'views';
 
   tagForm = new FormGroup({
     tags: new FormControl('')
@@ -41,12 +42,30 @@ export class TagsComponent implements OnInit {
   }
 
   parseDateTaken(date) {
-    return date.split(' ').reverse().join('.');
+    return date.split(' ')[0].split('-').reverse().join('.');
   }
 
   parseDateUploaded(date) {
     return new Date(parseInt(date, 10) * 1000).toISOString()
       .split('T')[0].split('-').reverse().join('.');
+  }
+
+  sortBy(fieldName) {
+    this.activeSort = fieldName;
+
+    this.photos.sort((prevRecord, nextRecord) => {
+      const prev = prevRecord[fieldName].toUpperCase(); // ignore upper and lowercase
+      const next = nextRecord[fieldName].toUpperCase(); // ignore upper and lowercase
+
+      if (prev < next) {
+        return -1;
+      }
+      if (prev > next) {
+        return 1;
+      }
+
+      return 0;
+    });
   }
 
 }

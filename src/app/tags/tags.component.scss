@@ -13,6 +13,12 @@
     text-align: left;
     padding-left: 0;
   }
+
+  .active {
+    background-color: transparent;
+    color: inherit;
+    font-weight: bolder;
+  }
 }
 
 .search-results {
