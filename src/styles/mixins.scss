@@ -1,0 +1,23 @@
+@mixin tag-card() {
+  .views, .search-tag {
+    position: absolute;
+  }
+
+  .search-tag {
+    background: white;
+    padding: 0em 2em;
+    border-radius: 2px;
+    color: #777;
+    left: 6px;
+    top: 6px;
+  }
+
+  .views {
+    font-size: 3em;
+    color: white;
+    margin: 0 auto;
+    right: 1.5em;
+    top: 1.5em;
+    font-weight: bold;
+  }
+}
