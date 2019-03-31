@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiService } from './../providers/api.service';
 import { stripAndFilterTags } from '../definitions';
 
@@ -14,7 +14,7 @@ export class TagsComponent implements OnInit {
   activeSort = 'views';
 
   tagForm = new FormGroup({
-    tags: new FormControl('')
+    tags: new FormControl('', [ Validators.required ])
   });
 
   constructor(private apiService: ApiService) { }
@@ -44,6 +44,8 @@ export class TagsComponent implements OnInit {
   resetForm() {
     this.tagForm.setValue({ tags: '' });
   }
+
+  get tags() { return this.tagForm.get('tags'); }
 
   parseDateTaken(date) {
     return date.split(' ')[0].split('-').reverse().join('.');
