@@ -1,7 +1,7 @@
 <div class="card">
   <div *ngIf="showDetail">
     <span class="views">{{ photo.views }}</span>
-    <span class="search-tag">{{ photo.title | titlecase }}</span>
+    <span class="search-tag">{{ photo.tags | uppercase }}</span>
   </div>
   <div class="card-block">
     <img [src]="photo.url_q" class="card-img-top" alt="...">
