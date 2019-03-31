@@ -16,7 +16,7 @@ export class ApiService {
   fetchTags(tags): Observable<any> {
     const params = new HttpParams()
       .set('api_key', environment.apiKey)
-      .set('per_page', '10')
+      .set('per_page', '1')
       .set('tags', tags)
       .set('extras', 'date_upload, date_taken, owner_name, views, url_q');
 

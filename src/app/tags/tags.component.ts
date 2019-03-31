@@ -10,7 +10,9 @@ import { stripAndFilterTags } from '../definitions';
 })
 export class TagsComponent implements OnInit {
   photos: any[] = [];
+  photoTags: string[] = [];
   noTagEnteredMessage = false;
+  tagAddedAlready = false;
   activeSort = 'views';
 
   tagForm = new FormGroup({
@@ -32,11 +34,25 @@ export class TagsComponent implements OnInit {
     const filteredTags = stripAndFilterTags(tags);
 
     this.apiService.fetchTags(filteredTags).subscribe((res) => {
-      console.log(res.photos.photo);
-      this.photos = res.photos.photo;
+      if (this.photoTags.includes(filteredTags)) {
+        this.tagAddedAlready = true;
+        return;
+      }
+
+      this.photoTags.push(filteredTags);
+      this.photos = [
+        ...this.photos,
+        ...res.photos.photo.map((singlePhoto) => {
+          singlePhoto['tags'] = filteredTags;
+          return singlePhoto;
+        })
+      ];
+
+      console.log(this.photos)
 
       this.sortBy(this.activeSort);
       this.noTagEnteredMessage = false;
+      this.tagAddedAlready = false;
       this.resetForm();
     });
   }
